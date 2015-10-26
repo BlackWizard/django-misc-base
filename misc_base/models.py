@@ -21,7 +21,7 @@ STATUS = (
 )
 
 class BaseStatusModel(models.Model):
-    status = models.PositiveSmallIntegerField(_(u'Status'), max_length=3, choices=STATUS, default=0, db_index=True)
+    status = models.PositiveSmallIntegerField(_(u'Status'), choices=STATUS, default=0, db_index=True)
 
     class Meta:
         abstract = True
