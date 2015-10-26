@@ -5,7 +5,7 @@ from django.utils.html import escape, conditional_escape
 from django.utils.encoding import force_unicode
 from django.forms.widgets import ClearableFileInput as oldWidget, CheckboxInput, FileInput, Input
 
-from nginx_filter_image.templatetags.pimage import pimagei_single, pimage_sizes
+from nginx_filter_image.templatetags.pimage import pimage_single, pimage_sizes
 
 class ClearableFileInput(oldWidget, FileInput):
     #template_with_initial = u'%(initial_text)s: %(initial)s %(clear_template)s<br />%(input_text)s: %(input)s'

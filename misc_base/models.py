@@ -64,7 +64,7 @@ class BasePositionModel(models.Model):
          ordering = ('order', )
          abstract = True
 
-class BaseUIDModel(BaseModel, BaseNameModel):
+class BaseUIDModel(BaseModel, BaseStatusModel, BaseNameModel):
     uid = models.CharField(_('UID'), max_length=16, db_index=True, unique=True, null = True, blank = True)
 
     class Meta:
