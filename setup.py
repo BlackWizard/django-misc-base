@@ -2,7 +2,7 @@ from setuptools import setup, find_packages
 
 setup(
     name='django-misc-base',
-    version='1.0',
+    version='1.0.1',
     description='Base miscellaneous packages for django.',
     long_description=open('README.md').read(),
     author='BlackWizard',
