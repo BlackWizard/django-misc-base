@@ -1,10 +1,19 @@
 # coding=utf-8
 
+from unidecode import unidecode
+
 from django.db import models
+from django.template import defaultfilters
 
 from django.utils.translation import ugettext_lazy as _
 
 from positions.fields import PositionField
+
+
+class SlugMixin(object):
+    def get_slug_name(self):
+        return defaultfilters.slugify(unidecode(self.name or 'xxx'))
+
 
 class BaseModel(models.Model):
     id = models.AutoField(primary_key=True)
