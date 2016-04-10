@@ -1,3 +1,8 @@
+from unidecode import unidecode
+
+from django.template import defaultfilters
+
+
 # http://www.djangosnippets.org/snippets/342/
 
 def preload_templatetags():
@@ -14,3 +19,10 @@ def preload_templatetags():
             add_to_builtins(lib)
     except AttributeError:
         pass
+
+def slugify(value):
+    return defaultfilters.slugify(
+        unidecode(
+            value
+        )
+    )

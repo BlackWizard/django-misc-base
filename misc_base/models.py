@@ -1,18 +1,17 @@
 # coding=utf-8
 
-from unidecode import unidecode
-
 from django.db import models
-from django.template import defaultfilters
 
 from django.utils.translation import ugettext_lazy as _
 
 from positions.fields import PositionField
 
+from .utils import slugify
 
-class SlugMixin(object):
+
+class SlugNameMixin(object):
     def get_slug_name(self):
-        return defaultfilters.slugify(unidecode(self.name or 'xxx'))
+        return slugify(self.name or 'xxx')
 
 
 class BaseModel(models.Model):
@@ -83,3 +82,15 @@ class BaseUIDPositionModel(BaseUIDModel, BasePositionModel):
 
     class Meta(BasePositionModel.Meta):
         abstract = True
+
+def soap_client():
+    from django.conf import settings
+    from suds.client import Client
+
+    conf = settings.SOAP_DB
+    return Client(
+        conf.get('url'), 
+        username=conf.get('username'), 
+        password=conf.get('password'), 
+        timeout=conf.get('timeout')
+    )

@@ -2,7 +2,7 @@ from setuptools import setup, find_packages
 
 setup(
     name='django-misc-base',
-    version='1.0.1',
+    version='1.0.7',
     description='Base miscellaneous packages for django.',
     long_description=open('README.md').read(),
     author='BlackWizard',
@@ -18,6 +18,11 @@ setup(
         'Programming Language :: Python',
         'Framework :: Django',
     ],
-    install_requires=['django-nginx-filter-image', ],
+    install_requires=[
+        'django-nginx-filter-image',
+        'unidecode',
+        'django-tinymce',
+        'django-positions',
+    ],
     zip_safe=False,
 )
