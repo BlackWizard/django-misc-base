@@ -65,6 +65,11 @@ class BaseSEOModel(models.Model):
     class Meta:
         abstract = True
 
+class BaseSEOHeadModel(models.Model):
+    ht = models.TextField(_(u'SEO in head'), blank=True, null=True)
+    class Meta:
+        abstract = True
+
 class BasePositionModel(models.Model):
      order = PositionField(verbose_name=_(u'Position'))
 
