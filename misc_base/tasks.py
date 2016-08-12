@@ -38,7 +38,24 @@ class SingleTask(Task):
     lock_time = 3600
     cache = {}
 
-    def create_object(self, obj, uid, val, precache = True):
+    lang = {
+        'ru': 'RU',
+        'en': 'EN',
+        'uk': 'UA',
+        'fr': 'FR',
+        'de': 'GR'
+    }
+
+    def append_local(self, cls, attr, prefix, val):
+        obj = cls()
+        attrs = {}
+        for k, v in self.lang.items():
+            if hasattr(obj, attr + '_' + k):
+                attrs[attr + '_' + k] = val.get(prefix + '_' + v)
+
+        return attrs
+
+    def create_object(self, obj, uid, val, local=None, precache = True):
 
         # Caching
         cl_name = obj.__name__.lower()
@@ -48,6 +65,13 @@ class SingleTask(Task):
                 cache.update({item.uid: item})
             self.cache.update({cl_name: cache})
         record, created = self.cache.get(cl_name, {}).get(uid), False
+
+        # Localizing
+        if local:
+            for k, v in local[1].items():
+                val.update(
+                    self.append_local(obj, k, v, local[0])
+                )
 
         # Creating and updating
         if record is None:
